@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TNP บ้านใจดี ก่อสร้าง</title>
+
+<style>
+body {
+  font-family: 'Prompt', sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+}
+header {
+  background: #0a5c3b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+button {
+  background: #0a5c3b;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+.result {
+  font-size: 20px;
+  color: #0a5c3b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>TNP บ้านใจดี ก่อสร้าง</h1>
+  <p>รับสร้างบ้านคุณภาพ โดยทีมมืออาชีพ</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>💰 ประเมินราคาสร้างบ้าน</h2>
+
+    <label>ขนาดพื้นที่ (ตร.ม.)</label>
+    <input type="number" id="area" placeholder="เช่น 150">
+
+    <label>เลือกระดับงาน</label>
+    <select id="grade">
+      <option value="12000">มาตรฐาน (12,000)</option>
+      <option value="15000">ระดับดี (15,000)</option>
+      <option value="18000">พรีเมียม (18,000)</option>
+    </select>
+
+    <button onclick="calc()">คำนวณราคา</button>
+
+    <p class="result" id="result"></p>
+
+    <button onclick="sendLine()">📲 ส่งไป LINE</button>
+  </div>
+
+  <div class="card">
+    <h2>📞 ติดต่อเรา</h2>
+    <p>โทร: 094-976-9422</p>
+    <p>Email: tnp.baanjaiidee@gmail.com</p>
+    <p>ที่อยู่: 233 หมู่ 10 ต.หัวสะพาน อ.เมือง จ.เพชรบุรี</p>
+  </div>
+
+</div>
+
+<script>
+function calc() {
+  let area = document.getElementById("area").value;
+  let rate = document.getElementById("grade").value;
+
+  if(area == "") {
+    document.getElementById("result").innerText = "กรุณากรอกพื้นที่";
+    return;
+  }
+
+  let total = area * rate;
+  document.getElementById("result").innerText =
+    "ราคาประมาณ: " + total.toLocaleString() + " บาท";
+}
+
+function sendLine() {
+  let text = document.getElementById("result").innerText;
+  if(text == "") {
+    alert("กรุณาคำนวณก่อน");
+    return;
+  }
+  let url = "https://line.me/R/msg/text/?" + encodeURIComponent(text);
+  window.open(url);
+}
+</script>
+
+</body>
+</html>
